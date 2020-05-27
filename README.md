@@ -1,4 +1,9 @@
-# SPA: App de Contatos - PARTE 2
+# SPA: App de Contatos - COMPLETO
+
+# Atualização 26/05/2020
+O código do desafio não exige o uso dos Hooks do React.
+Mesmo assim, decidi refatorar o código legado para fins didáticos e para mantê-lo atualizado.
+Diante disso, este repositório sempre será atualizado quando ocorrerem mudanças significativas no React.  
 
 ## Objetivo:
 O desafio é desenvolver um *SPA (Single Page Application)* de uma lista de contatos em **React** com as seguintes funcionalidades:
@@ -11,8 +16,8 @@ O desafio é desenvolver um *SPA (Single Page Application)* de uma lista de cont
 
 GET: *https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts*
 
-### Requisitos - Parte 2:
-
+### Requisitos:
+- Organizar cada componente em uma pasta deparada
 - Crie os *estados* do SPA.
 - Consuma a *API de contatos* no *ciclo de vida correto* do componente.
 - Implemente a **busca** para filtrar os contatos em tempo real.
