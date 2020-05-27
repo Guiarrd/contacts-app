@@ -1,0 +1,90 @@
+.contact {
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .07);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 5px;
+
+  &:first-of-type {
+    margin-bottom: 5px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 5px;
+    font-weight: bold;
+
+    & .contact__avatar {
+      height: 0;
+      border: none;
+    }
+
+    .contact__data:nth-child(2) {
+      color: #000;
+    }
+  }
+}
+
+.contact__avatar {
+  border-radius: 50px;
+  height: 35px;
+  overflow: hidden;
+  width: 35px;
+  border: 2px solid #9FA9BC;
+  margin-right: 10px;
+
+  & img {
+    height: 100%;
+  }
+}
+
+.contact__data {
+  width: calc(100% / 6);
+  padding: 0 10px;
+}
+
+.card-contact {
+  width: 100%;
+  padding: 5px 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  box-shadow: 0 px 5px rgba(0, 0, 0, 0.1);
+  align-content: center;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.card-contact__avatar {
+  margin-left: 5px;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  align-self: center;
+  .card-contact__img {
+    border-radius: 100%;
+    border: 2px solid #9fa9bb;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.card-contact__info {
+  width: calc(100% / 6);
+  padding: 0 10px;
+  align-self: center;
+  font-size: 1.3rem;
+}
+
+.sorted-by {
+  color: #4d84ff;
+}
