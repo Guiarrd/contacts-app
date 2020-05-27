@@ -1,78 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Topbar from './components/Topbar';
 import Filters from './components/Filters';
 import Contacts from './components/Contacts';
 
 import './App.scss';
 
-const URL = 'https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts';
-const compareStringsIgnoringCase = (str1, str2) => str1.toLowerCase().includes(str2.toLowerCase());
-
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      contacts: [],
-      filteredContacts: [],
-      search: '',
-      sortBy: '',
-      buttonSelected: false
-    }
-  }
-
-  async componentDidMount() {
-    const response = await fetch(URL)
-      .then(resp => resp.json())
-      .then(data => data)
-      .catch(err => console.log(err));
-
-    this.setState({
-      contacts: response,
-      filteredContacts: response
-    })
-  }
-
-  handleSearch = async content => {
-    let { contacts, sortBy } = this.state;
-    sortBy = sortBy ? sortBy : 'name';
-    const filteredContacts = contacts.filter(contact => 
-      compareStringsIgnoringCase(contact[sortBy], content));
-      
-    this.setState({
-      filteredContacts: filteredContacts, 
-      search: content
-    });
-  }
+const App = () => {
+  const [contacts, setContacts] = useState([]);
+  const [filteredContacts, setFilteredContacts] = useState([]);
+  const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState('name');
   
-  handleSortBy = property => {
-    const { filteredContacts, sortBy } = this.state;
-    if (sortBy === property) {
-      this.setState({sortBy: ''});
-    } else {
-      this.setState({sortBy: property});
-    }
+  useEffect(() => {
+    fetch('https://5e82ac6c78337f00160ae496.mockapi.io/api/v1/contacts')
+    .then(resp => resp.json())
+    .then(data => {
+      setContacts(data);
+      setFilteredContacts(data);
+    })
+  }, [])
+  
+  const toggleFilter = property => sortBy === property ? setSortBy('') : setSortBy(property);
+  
+  const handleSearch = content => {
+    const filterContacts = contacts.filter(contact => {
+      if (sortBy === 'admissionDate') {
+        return new Date(contact[sortBy]).toLocaleDateString('pt-BR').includes(content);
+      }
+      
+      return contact[sortBy].toLowerCase().includes(content.toLowerCase());
+    });
+    
+    setFilteredContacts(filterContacts);
+    setSearch(content);
+  }
 
+  const handleSortBy = property => {
+    toggleFilter(property);
     let sortedContacts = filteredContacts.sort((item1, item2) => {
       return item2[property] > item1[property] ? -1 : 1
     });
-    this.setState({filteredContacts: sortedContacts})
+    
+    setFilteredContacts(sortedContacts);
   }
-
-  render() {
-    const { filteredContacts, search, sortBy } = this.state;
-    return (
-      <div className="app" data-testid="app">
-        <Topbar />
-        <Filters 
-          search={search} 
-          sortBy={sortBy}
-          handleSearch={this.handleSearch}
-          handleSortBy={this.handleSortBy}
-        />
-        <Contacts contacts={filteredContacts} sortBy={sortBy} />
-      </div>
-    )
-  }
+  
+  return (
+    <div className="app" data-testid="app">
+      <Topbar />
+      <Filters 
+        search={search} 
+        sortBy={sortBy}
+        handleSearch={handleSearch}
+        handleSortBy={handleSortBy}
+      />
+      <Contacts 
+        contacts={filteredContacts} 
+        sortBy={sortBy} 
+      />
+    </div>
+  )
 }
 
 export default App;
