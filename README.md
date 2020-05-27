@@ -1,6 +1,6 @@
 # SPA: App de Contatos - COMPLETO
 
-# Atualização 26/05/2020
+## Atualização 26/05/2020
 O código do desafio não exige o uso dos Hooks do React.
 Mesmo assim, decidi refatorar o código legado para fins didáticos e para mantê-lo atualizado.
 Diante disso, este repositório sempre será atualizado quando ocorrerem mudanças significativas no React.  
